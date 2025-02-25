@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YaremaFood</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Для иконок -->
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{% url 'main:home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="#menu">Меню</a>
+                <a href="#about">О нас</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            <div class="auth-button">
+                {% if username %}
+                    <div class="user-menu">
+                        <span class="username">{{ username }}</span>
+                        <form method="post" action="{% url 'main:logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-logout">Выйти</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <button class="btn-login" id="show-login-panel">Войти</button>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Сообщения -->
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="promo">
+            <div class="text">
+                <h1>Заказывайте готовую еду в офис у нас</h1>
+                <p>Бесплатная доставка при заказе от 2000₽</p>
+                <a href="#" class="order-button">ПЕРЕЙТИ К ЗАКАЗУ</a>
+            </div>
+            <div class="image-container">
+                <img src="{% static 'images/food.jpg' %}" alt="Еда" class="promo-image">
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://t.me/andryare"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://t.me/andryare"><i class="fab fa-telegram"></i></a>
+                <a href="https://t.me/andryare"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-center">
+                <span class="footer-title">YaremaFood</span>
+            </div>
+            <div class="footer-copyright">
+                <span>© 2025 YaremaFood</span>
+            </div>
+        </div>
+    </footer>
+
+   <!-- Панель входа и регистрации -->
+<div class="login-overlay" id="login-overlay"></div>
+<div class="login-panel" id="login-panel">
+    <button class="close-btn" id="close-login-panel">&times;</button> <!-- Кнопка закрытия -->
+    
+    <!-- Сообщение об ошибке -->
+    <div id="login-error" class="alert" style="display: none;"></div>
+
+    <!-- Форма входа -->
+    <div id="login-form">
+        <h2>Вход</h2>
+        <form method="post" action="{% url 'main:login' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Логин</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <p class="register-link">Нет аккаунта? <a href="#" id="show-register-form">Зарегистрироваться</a></p>
+    </div>
+
+    <!-- Форма регистрации (скрыта по умолчанию) -->
+    <div id="register-form" style="display: none;">
+        <h2>Регистрация</h2>
+        <form method="post" action="{% url 'main:register' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="new-username">Логин</label>
+                <input type="text" id="new-username" name="new-username" required>
+            </div>
+            <div class="input-group">
+                <label for="new-password">Пароль</label>
+                <input type="password" id="new-password" name="new-password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Подтвердите пароль</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <p class="login-link">Уже есть аккаунт? <a href="#" id="show-login-form">Войти</a></p>
+    </div>
+</div>
+
+<!-- Скрипт для управления панелью входа и регистрации -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginPanel = document.getElementById('login-panel');
+        const loginOverlay = document.getElementById('login-overlay');
+        const loginError = document.getElementById('login-error');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegisterBtn = document.getElementById('show-register-form');
+        const showLoginBtn = document.getElementById('show-login-form');
+        const errorMessage = "{{ error_message|escapejs }}";
+
+        // Показываем сообщение об ошибке и оставляем панель открытой
+        if (errorMessage) {
+            loginError.textContent = errorMessage;
+            loginError.style.display = 'block';
+            loginPanel.style.display = 'block';
+            loginOverlay.style.display = 'block';
+            loginPanel.style.right = '0';
+            
+            // Определяем, какую форму показать (вход или регистрация)
+            if (document.referrer.includes('register')) {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            } else {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            }
+        }
+
+        // Показать панель входа
+        const showLoginPanelBtn = document.getElementById('show-login-panel');
+        showLoginPanelBtn?.addEventListener('click', function() {
+            loginPanel.style.display = 'block';
+            loginOverlay.style.display = 'block';
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            setTimeout(() => {
+                loginPanel.style.right = '0';
+            }, 10);
+        });
+
+        // Закрыть панель
+        const closeLoginPanelBtn = document.getElementById('close-login-panel');
+        closeLoginPanelBtn?.addEventListener('click', function() {
+            loginPanel.style.right = '-35%';
+            setTimeout(() => {
+                loginPanel.style.display = 'none';
+                loginOverlay.style.display = 'none';
+            }, 300);
+        });
+
+        // Переключение между формами
+        showRegisterBtn?.addEventListener('click', function() {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLoginBtn?.addEventListener('click', function() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Закрытие по клику на оверлей
+        loginOverlay?.addEventListener('click', function() {
+            loginPanel.style.right = '-35%';
+            setTimeout(() => {
+                loginPanel.style.display = 'none';
+                loginOverlay.style.display = 'none';
+            }, 300);
+        });
+
+        // Обработка отправки форм
+        document.querySelector('form[action*="login"]')?.addEventListener('submit', function(e) {
+            if (errorMessage) {
+                loginPanel.style.display = 'block';
+                loginOverlay.style.display = 'block';
+            }
+        });
+
+        document.querySelector('form[action*="register"]')?.addEventListener('submit', function(e) {
+            if (errorMessage) {
+                loginPanel.style.display = 'block';
+                loginOverlay.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+<!-- В конец файла перед </body> -->
+<script>
+    // Автоматическое скрытие сообщений
+    document.addEventListener('DOMContentLoaded', function() {
+        var messages = document.querySelectorAll('.alert');
+        messages.forEach(function(message) {
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 5000);
+        });
+    });
+</script>
+
+<!-- Добавить JavaScript для профиля -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const profileBtn = document.getElementById('show-profile');
+    const profileModal = document.getElementById('profile-modal');
+    const closeProfile = document.querySelector('.close-profile');
+
+    // Показать профиль при клике на имя
+    profileBtn?.addEventListener('click', async function() {
+        try {
+            const response = await fetch('{% url "main:profile" %}');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('profile-username').textContent = data.username;
+                document.getElementById('profile-role').textContent = data.role;
+                profileModal.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки профиля:', error);
+        }
+    });
+
+    // Закрыть профиль
+    closeProfile?.addEventListener('click', function() {
+        profileModal.style.display = 'none';
+    });
+
+    // Закрыть при клике вне модального окна
+    window.addEventListener('click', function(event) {
+        if (event.target == profileModal) {
+            profileModal.style.display = 'none';
+        }
+    });
+});
+</script>
+</body>
+</html>
