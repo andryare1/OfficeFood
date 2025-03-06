@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -52,11 +53,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'OfficeFood.urls'
 
+# Убедитесь, что 'django.template.context_processors.media' добавлен в контекст-процессоры
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [],  # Пустой список, так как templates теперь в приложении
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -123,9 +125,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Определяем BASE_DIR
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Настройки медиа должны быть такими
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -133,20 +132,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Для отладки можно временно добавить:
 print(f"MEDIA_ROOT path: {MEDIA_ROOT}")
 
-# Убедитесь, что 'django.template.context_processors.media' добавлен в контекст-процессоры
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media',  # Добавьте эту строку
-            ],
-        },
-    },
-]
