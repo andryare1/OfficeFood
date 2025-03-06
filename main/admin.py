@@ -31,7 +31,27 @@ class MenuAdmin(admin.ModelAdmin):
 
 @admin.register(Dish)
 class DishAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'description', 'display_image']
+    list_display = ('name', 'category', 'price')
+    list_filter = ('category',)
+    search_fields = ('name', 'description')
+    fields = ('name', 'description', 'price', 'category', 'image')
+
+    list_display = ['name', 'price', 'description', 'display_image','category']
+    search_fields = ['name', 'description']
+    list_filter = ['price','category']
+    ordering = ['name']
+    readonly_fields = ['preview_image']
+    
+    def display_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="50" />', obj.image.url)
+        return "Нет изображения"
+    
+    def preview_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="200" height="200" />', obj.image.url)
+        return "Нет изображения"
+        list_display = ['name', 'price', 'description', 'display_image','category']
     search_fields = ['name', 'description']
     list_filter = ['price']
     ordering = ['name']
@@ -50,7 +70,11 @@ class DishAdmin(admin.ModelAdmin):
     display_image.short_description = 'Изображение'
     preview_image.short_description = 'Предпросмотр изображения'
 
-    fields = ['name', 'price', 'description', 'image', 'preview_image']
+    fields = ['name', 'price', 'description', 'image', 'preview_image', 'category']
+
+    display_image.short_description = 'Изображение'
+    preview_image.short_description = 'Предпросмотр изображения'
+
 
 @admin.register(MenuDish)
 class MenuDishAdmin(admin.ModelAdmin):

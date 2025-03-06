@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import User  # Импортируем только вашу модель User
 from django.urls import reverse
-from django.db import IntegrityError
 
+from .models import Dish
 
 def home(request):
     # Получаем username из сессии
@@ -80,5 +80,30 @@ def get_user_profile(request):
         except User.DoesNotExist:
             return JsonResponse({'error': 'Пользователь не найден'}, status=404)
     return JsonResponse({'error': 'Unauthorized'}, status=401)
+
+def menu(request):
+    context = {}
+    if request.user.is_authenticated:
+        context['username'] = request.user.username
+    
+    # Получаем все блюда из базы данных
+    dishes = Dish.objects.all()
+    
+    # Группируем блюда по категориям
+    categories = {
+        'first': {'name': 'Первые блюда', 'dishes': []},
+        'second': {'name': 'Вторые блюда', 'dishes': []},
+        'drinks': {'name': 'Напитки', 'dishes': []},
+        'desserts': {'name': 'Десерты', 'dishes': []},
+        'bakery': {'name': 'Выпечка', 'dishes': []},
+        'salad': {'name': 'Салаты', 'dishes': []},
+    }
+    
+    for dish in dishes:
+        if dish.category in categories:
+            categories[dish.category]['dishes'].append(dish)
+    
+    context['categories'] = categories
+    return render(request, 'menu.html', context)
 
 

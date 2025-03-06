@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="nav-links">
-                <a href="#menu">Меню</a>
+                <a href="{% url 'main:menu' %}">Меню</a>
                 <a href="#about">О нас</a>
                 <a href="#contact">Контакты</a>
             </div>
@@ -39,6 +39,8 @@
         </nav>
     </header>
 
+
+
     <!-- Сообщения -->
     <div class="messages">
         {% if messages %}
@@ -54,7 +56,7 @@
             <div class="text">
                 <h1>Заказывайте готовую еду в офис у нас</h1>
                 <p>Бесплатная доставка при заказе от 2000₽</p>
-                <a href="#" class="order-button">ПЕРЕЙТИ К ЗАКАЗУ</a>
+                <a href="{% url 'main:menu' %}" class="order-button">ПЕРЕЙТИ К ЗАКАЗУ</a>
             </div>
             <div class="image-container">
                 <img src="{% static 'images/food.jpg' %}" alt="Еда" class="promo-image">
@@ -265,5 +267,110 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+.menu-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-menu-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.menu-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.menu-category h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.menu-item {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.menu-item h4 {
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+.menu-item p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    display: block;
+    font-weight: bold;
+    color: #e44d26;
+    margin: 0.5rem 0;
+}
+
+.add-to-cart {
+    background: #e44d26;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background: #c73e1d;
+}
+</style>
+
 </body>
 </html>

@@ -38,13 +38,35 @@ class Menu(models.Model):
 
 
 class Dish(models.Model):
+    CATEGORY_CHOICES = [
+        ('first', 'Первые блюда'),
+        ('second', 'Вторые блюда'),
+        ('salad', 'Салаты'),
+        ('drinks', 'Напитки'),
+        ('desserts', 'Десерты'),
+        ('bakery', 'Выпечка'),
+    ]
+
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(
         upload_to='dishes/',
-        verbose_name='Изображение блюда'
+        verbose_name='Изображение блюда',
+        null=True,
+        blank=True
     )
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+        default='drinks',
+        verbose_name='Категория блюда'
+    )
+
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return '/static/images/default_photo.png'
 
     def __str__(self):
         return self.name

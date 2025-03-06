@@ -160,6 +160,16 @@
         }
     },
     {
+        "model": "main.dish",
+        "pk": 6,
+        "fields": {
+            "name": "Салат Цезарь",
+            "description": "Самый вкусный салат в мире",
+            "price": "480.00",
+            "image": ""
+        }
+    },
+    {
         "model": "main.dishproduct",
         "pk": 1,
         "fields": {
@@ -631,6 +641,556 @@
             "dish": 9,
             "quantity": 1,
             "price": "320.00"
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 11,
+        "fields": {
+            "name": "Борщ классический",
+            "description": "Традиционный борщ со сметаной и чесночными пампушками",
+            "price": "320.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 12,
+        "fields": {
+            "name": "Суп грибной",
+            "description": "Ароматный суп из белых грибов",
+            "price": "280.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 13,
+        "fields": {
+            "name": "Щи из свежей капусты",
+            "description": "Классические щи с говядиной",
+            "price": "250.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 14,
+        "fields": {
+            "name": "Уха по-царски",
+            "description": "Уха из трех видов рыбы",
+            "price": "390.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 15,
+        "fields": {
+            "name": "Солянка сборная",
+            "description": "Наваристая солянка с копченостями",
+            "price": "350.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 16,
+        "fields": {
+            "name": "Крем-суп грибной",
+            "description": "Нежный суп-пюре из шампиньонов",
+            "price": "290.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 17,
+        "fields": {
+            "name": "Суп-лапша куриный",
+            "description": "Домашний суп с курицей и лапшой",
+            "price": "240.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 18,
+        "fields": {
+            "name": "Харчо",
+            "description": "Грузинский суп с говядиной",
+            "price": "340.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 19,
+        "fields": {
+            "name": "Окрошка",
+            "description": "Холодный суп на квасе",
+            "price": "260.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 20,
+        "fields": {
+            "name": "Гаспачо",
+            "description": "Холодный испанский суп из томатов",
+            "price": "280.00",
+            "category": "first",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 21,
+        "fields": {
+            "name": "Стейк Рибай",
+            "description": "Сочный стейк из мраморной говядины",
+            "price": "890.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 22,
+        "fields": {
+            "name": "Котлеты по-киевски",
+            "description": "Классические котлеты с сливочным маслом внутри",
+            "price": "420.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 23,
+        "fields": {
+            "name": "Лосось на гриле",
+            "description": "Стейк из лосося с овощами",
+            "price": "650.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 24,
+        "fields": {
+            "name": "Пельмени сибирские",
+            "description": "Домашние пельмени со сметаной",
+            "price": "380.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 25,
+        "fields": {
+            "name": "Бефстроганов",
+            "description": "Говядина в сливочном соусе с грибами",
+            "price": "460.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 26,
+        "fields": {
+            "name": "Плов узбекский",
+            "description": "Традиционный плов с бараниной",
+            "price": "420.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 27,
+        "fields": {
+            "name": "Жаркое по-домашнему",
+            "description": "Мясо с картофелем и овощами",
+            "price": "390.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 28,
+        "fields": {
+            "name": "Утка по-пекински",
+            "description": "Утка с хрустящей корочкой",
+            "price": "780.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 29,
+        "fields": {
+            "name": "Паста Карбонара",
+            "description": "Спагетти с беконом в сливочном соусе",
+            "price": "420.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 30,
+        "fields": {
+            "name": "Цыпленок табака",
+            "description": "Курица с чесночным соусом",
+            "price": "450.00",
+            "category": "second",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 31,
+        "fields": {
+            "name": "Морс клюквенный",
+            "description": "Освежающий морс из клюквы",
+            "price": "80.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 32,
+        "fields": {
+            "name": "Компот из сухофруктов",
+            "description": "Домашний компот",
+            "price": "60.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 33,
+        "fields": {
+            "name": "Лимонад домашний",
+            "description": "Газированный напиток с лимоном",
+            "price": "90.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 34,
+        "fields": {
+            "name": "Смузи Тропический",
+            "description": "Смузи из манго и ананаса",
+            "price": "160.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 35,
+        "fields": {
+            "name": "Чай зеленый",
+            "description": "Китайский зеленый чай",
+            "price": "60.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 36,
+        "fields": {
+            "name": "Чай черный",
+            "description": "Цейлонский черный чай",
+            "price": "60.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 37,
+        "fields": {
+            "name": "Кофе Капучино",
+            "description": "Классический капучино",
+            "price": "90.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 38,
+        "fields": {
+            "name": "Кофе Американо",
+            "description": "Черный кофе",
+            "price": "70.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 39,
+        "fields": {
+            "name": "Сок апельсиновый",
+            "description": "Свежевыжатый сок",
+            "price": "120.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 40,
+        "fields": {
+            "name": "Молочный коктейль",
+            "description": "Ванильный коктейль",
+            "price": "140.00",
+            "category": "drinks",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 41,
+        "fields": {
+            "name": "Тирамису",
+            "description": "Итальянский десерт с маскарпоне",
+            "price": "320.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 42,
+        "fields": {
+            "name": "Чизкейк Нью-Йорк",
+            "description": "Классический чизкейк",
+            "price": "280.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 43,
+        "fields": {
+            "name": "Штрудель яблочный",
+            "description": "Венский штрудель с мороженым",
+            "price": "260.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 44,
+        "fields": {
+            "name": "Профитроли",
+            "description": "Пирожные с заварным кремом",
+            "price": "240.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 45,
+        "fields": {
+            "name": "Брауни",
+            "description": "Шоколадный брауни с орехами",
+            "price": "220.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 46,
+        "fields": {
+            "name": "Мороженое ассорти",
+            "description": "Три шарика мороженого",
+            "price": "180.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 47,
+        "fields": {
+            "name": "Панна-котта",
+            "description": "Итальянский десерт со свежими ягодами",
+            "price": "260.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 48,
+        "fields": {
+            "name": "Эклер",
+            "description": "Французское пирожное с кремом",
+            "price": "160.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 49,
+        "fields": {
+            "name": "Наполеон",
+            "description": "Слоеный торт с заварным кремом",
+            "price": "240.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 50,
+        "fields": {
+            "name": "Муравейник",
+            "description": "Домашний торт из печенья",
+            "price": "220.00",
+            "category": "desserts",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 51,
+        "fields": {
+            "name": "Круассан классический",
+            "description": "Французский масляный круассан",
+            "price": "120.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 52,
+        "fields": {
+            "name": "Пирожок с капустой",
+            "description": "Домашний пирожок из дрожжевого теста",
+            "price": "80.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 53,
+        "fields": {
+            "name": "Ватрушка с творогом",
+            "description": "Сдобная булочка с творогом",
+            "price": "90.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 54,
+        "fields": {
+            "name": "Булочка с корицей",
+            "description": "Сладкая булочка с корицей",
+            "price": "100.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 55,
+        "fields": {
+            "name": "Пирог с яблоками",
+            "description": "Домашний яблочный пирог",
+            "price": "220.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 56,
+        "fields": {
+            "name": "Хачапури по-аджарски",
+            "description": "Грузинская лодочка с сыром и яйцом",
+            "price": "320.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 57,
+        "fields": {
+            "name": "Пицца Маргарита",
+            "description": "Классическая итальянская пицца",
+            "price": "350.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 58,
+        "fields": {
+            "name": "Багет французский",
+            "description": "Свежий багет",
+            "price": "90.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 59,
+        "fields": {
+            "name": "Пирожок с мясом",
+            "description": "Домашний пирожок с говядиной",
+            "price": "100.00",
+            "category": "bakery",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 60,
+        "fields": {
+            "name": "Расстегай с рыбой",
+            "description": "Пирожок с рыбной начинкой",
+            "price": "110.00",
+            "category": "bakery",
+            "image": ""
         }
     }
 ] 
