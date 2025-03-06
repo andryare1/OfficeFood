@@ -1,0 +1,636 @@
+[
+    {
+        "model": "main.user",
+        "pk": 1,
+        "fields": {
+            "username": "manager1",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "manager"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 2,
+        "fields": {
+            "username": "client1",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "client"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 3,
+        "fields": {
+            "username": "client2",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "client"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 4,
+        "fields": {
+            "username": "dispatcher1",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "dispatcher"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 5,
+        "fields": {
+            "username": "calculator1",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "calculator"
+        }
+    },
+    {
+        "model": "main.client",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "name": "Иван Петров",
+            "address": "ул. Ленина, 123",
+            "phone": "+7 (999) 123-45-67"
+        }
+    },
+    {
+        "model": "main.client",
+        "pk": 2,
+        "fields": {
+            "user": 3,
+            "name": "Мария Сидорова",
+            "address": "пр. Мира, 45",
+            "phone": "+7 (999) 765-43-21"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 1,
+        "fields": {
+            "name": "Картофель",
+            "unit": "кг",
+            "price_per_unit": "50.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 2,
+        "fields": {
+            "name": "Морковь",
+            "unit": "кг",
+            "price_per_unit": "40.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 3,
+        "fields": {
+            "name": "Свекла",
+            "unit": "кг",
+            "price_per_unit": "45.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 4,
+        "fields": {
+            "name": "Мясо говядина",
+            "unit": "кг",
+            "price_per_unit": "450.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 5,
+        "fields": {
+            "name": "Куриное филе",
+            "unit": "кг",
+            "price_per_unit": "280.00"
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 1,
+        "fields": {
+            "name": "Борщ",
+            "description": "Классический украинский борщ со сметаной",
+            "price": "250.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 2,
+        "fields": {
+            "name": "Котлета с пюре",
+            "description": "Домашняя котлета с картофельным пюре",
+            "price": "300.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 3,
+        "fields": {
+            "name": "Куриный суп",
+            "description": "Легкий куриный суп с вермишелью",
+            "price": "200.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 4,
+        "fields": {
+            "name": "Плов",
+            "description": "Узбекский плов с бараниной",
+            "price": "350.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 5,
+        "fields": {
+            "name": "Салат Оливье",
+            "description": "Классический салат Оливье",
+            "price": "180.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 1,
+        "fields": {
+            "dish": 1,
+            "product": 1,
+            "quantity_needed": "0.200"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 2,
+        "fields": {
+            "dish": 1,
+            "product": 2,
+            "quantity_needed": "0.100"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 3,
+        "fields": {
+            "dish": 2,
+            "product": 1,
+            "quantity_needed": "0.300"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 4,
+        "fields": {
+            "dish": 2,
+            "product": 5,
+            "quantity_needed": "0.200"
+        }
+    },
+    {
+        "model": "main.menu",
+        "pk": 1,
+        "fields": {
+            "menu_type": "day",
+            "menu_date_start": "2024-03-20",
+            "menu_date_end": "2024-03-20"
+        }
+    },
+    {
+        "model": "main.menu",
+        "pk": 2,
+        "fields": {
+            "menu_type": "week",
+            "menu_date_start": "2024-03-25",
+            "menu_date_end": "2024-03-31"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 1,
+        "fields": {
+            "menu": 1,
+            "dish": 1,
+            "day_of_week": "Среда"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 2,
+        "fields": {
+            "menu": 1,
+            "dish": 2,
+            "day_of_week": "Среда"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 3,
+        "fields": {
+            "menu": 2,
+            "dish": 3,
+            "day_of_week": "Понедельник"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 4,
+        "fields": {
+            "menu": 2,
+            "dish": 4,
+            "day_of_week": "Вторник"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 1,
+        "fields": {
+            "client": 1,
+            "order_date": "2024-03-20",
+            "total_price": "550.00"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 2,
+        "fields": {
+            "client": 2,
+            "order_date": "2024-03-20",
+            "total_price": "730.00"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 3,
+        "fields": {
+            "client": 1,
+            "order_date": "2024-03-21",
+            "total_price": "400.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 1,
+        "fields": {
+            "order": 1,
+            "dish": 1,
+            "quantity": 2,
+            "price": "500.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 2,
+        "fields": {
+            "order": 2,
+            "dish": 2,
+            "quantity": 1,
+            "price": "300.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 3,
+        "fields": {
+            "order": 2,
+            "dish": 3,
+            "quantity": 2,
+            "price": "400.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 4,
+        "fields": {
+            "order": 3,
+            "dish": 5,
+            "quantity": 2,
+            "price": "360.00"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 6,
+        "fields": {
+            "username": "manager2",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "manager"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 7,
+        "fields": {
+            "username": "client3",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "client"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 8,
+        "fields": {
+            "username": "client4",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "client"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 9,
+        "fields": {
+            "username": "dispatcher2",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "dispatcher"
+        }
+    },
+    {
+        "model": "main.user",
+        "pk": 10,
+        "fields": {
+            "username": "calculator2",
+            "password": "pbkdf2_sha256$600000$password123",
+            "role": "calculator"
+        }
+    },
+    {
+        "model": "main.client",
+        "pk": 3,
+        "fields": {
+            "user": 7,
+            "name": "Анна Иванова",
+            "address": "ул. Гагарина, 78",
+            "phone": "+7 (999) 111-22-33"
+        }
+    },
+    {
+        "model": "main.client",
+        "pk": 4,
+        "fields": {
+            "user": 8,
+            "name": "Петр Сергеев",
+            "address": "пр. Победы, 15",
+            "phone": "+7 (999) 444-55-66"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 6,
+        "fields": {
+            "name": "Рис",
+            "unit": "кг",
+            "price_per_unit": "120.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 7,
+        "fields": {
+            "name": "Лук репчатый",
+            "unit": "кг",
+            "price_per_unit": "35.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 8,
+        "fields": {
+            "name": "Масло подсолнечное",
+            "unit": "л",
+            "price_per_unit": "110.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 9,
+        "fields": {
+            "name": "Яйца",
+            "unit": "шт",
+            "price_per_unit": "8.00"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 10,
+        "fields": {
+            "name": "Молоко",
+            "unit": "л",
+            "price_per_unit": "80.00"
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 6,
+        "fields": {
+            "name": "Рисовая каша с молоком",
+            "description": "Классическая рисовая каша на молоке",
+            "price": "150.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 7,
+        "fields": {
+            "name": "Омлет",
+            "description": "Пышный омлет с молоком",
+            "price": "180.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 8,
+        "fields": {
+            "name": "Гречка с котлетой",
+            "description": "Гречневая каша с мясной котлетой",
+            "price": "280.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 9,
+        "fields": {
+            "name": "Рыба жареная",
+            "description": "Жареное филе трески",
+            "price": "320.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dish",
+        "pk": 10,
+        "fields": {
+            "name": "Винегрет",
+            "description": "Классический винегрет с горошком",
+            "price": "150.00",
+            "image": ""
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 5,
+        "fields": {
+            "dish": 6,
+            "product": 6,
+            "quantity_needed": "0.100"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 6,
+        "fields": {
+            "dish": 6,
+            "product": 10,
+            "quantity_needed": "0.300"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 7,
+        "fields": {
+            "dish": 7,
+            "product": 9,
+            "quantity_needed": "2.000"
+        }
+    },
+    {
+        "model": "main.dishproduct",
+        "pk": 8,
+        "fields": {
+            "dish": 7,
+            "product": 10,
+            "quantity_needed": "0.100"
+        }
+    },
+    {
+        "model": "main.menu",
+        "pk": 3,
+        "fields": {
+            "menu_type": "day",
+            "menu_date_start": "2024-03-21",
+            "menu_date_end": "2024-03-21"
+        }
+    },
+    {
+        "model": "main.menu",
+        "pk": 4,
+        "fields": {
+            "menu_type": "week",
+            "menu_date_start": "2024-04-01",
+            "menu_date_end": "2024-04-07"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 5,
+        "fields": {
+            "menu": 3,
+            "dish": 6,
+            "day_of_week": "Четверг"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 6,
+        "fields": {
+            "menu": 3,
+            "dish": 7,
+            "day_of_week": "Четверг"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 7,
+        "fields": {
+            "menu": 4,
+            "dish": 8,
+            "day_of_week": "Понедельник"
+        }
+    },
+    {
+        "model": "main.menudish",
+        "pk": 8,
+        "fields": {
+            "menu": 4,
+            "dish": 9,
+            "day_of_week": "Вторник"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 4,
+        "fields": {
+            "client": 3,
+            "order_date": "2024-03-21",
+            "total_price": "450.00"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 5,
+        "fields": {
+            "client": 4,
+            "order_date": "2024-03-21",
+            "total_price": "600.00"
+        }
+    },
+    {
+        "model": "main.order",
+        "pk": 6,
+        "fields": {
+            "client": 2,
+            "order_date": "2024-03-22",
+            "total_price": "480.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 5,
+        "fields": {
+            "order": 4,
+            "dish": 6,
+            "quantity": 3,
+            "price": "450.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 6,
+        "fields": {
+            "order": 5,
+            "dish": 7,
+            "quantity": 2,
+            "price": "360.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 7,
+        "fields": {
+            "order": 5,
+            "dish": 8,
+            "quantity": 1,
+            "price": "280.00"
+        }
+    },
+    {
+        "model": "main.orderdetail",
+        "pk": 8,
+        "fields": {
+            "order": 6,
+            "dish": 9,
+            "quantity": 1,
+            "price": "320.00"
+        }
+    }
+] 
