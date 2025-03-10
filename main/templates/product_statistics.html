@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистика продуктов - YaremaFood</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{% url 'main:home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'main:menu' %}">Меню</a>
+                <a href="{% url 'main:home' %}#about">О нас</a>
+                <a href="{% url 'main:home' %}#contact">Контакты</a>
+                <a href="{% url 'main:product_statistics' %}">Статистика</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="statistics-page">
+        <div class="container">
+            <h2>Статистика использования продуктов</h2>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <a href="{% url 'main:export_product_statistics' %}" class="btn-export">
+                        Выгрузить в CSV
+                    </a>
+                </div>
+            </div>
+
+            <div id="productChartData" data-chart='{{ chart_data|safe }}'></div>
+            <div id="categoryChartData" data-chart='{{ category_chart_data|safe }}'></div>
+
+            <div class="statistics-layout">
+                <div class="chart-container">
+                    <canvas id="productUsageChart"></canvas>
+                </div>
+                <div class="table-container">
+                    <table class="statistics-table">
+                        <thead>
+                            <tr>
+                                <th>Продукт</th>
+                                <th>Кол-во блюд</th>
+                                <th>Общее кол-во</th>
+                                <th>Общая стоимость</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stat in statistics %}
+                            <tr>
+                                <td>{{ stat.product__name }}</td>
+                                <td>{{ stat.dishes_count }}</td>
+                                <td>{{ stat.total_quantity }} {{ stat.product__unit }}</td>
+                                <td>{{ stat.total_cost|floatformat:2 }} ₽</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Секция статистики по категориям -->
+            <div class="category-statistics">
+                <h2 class="section-title">Статистика по категориям блюд</h2>
+                
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <a href="{% url 'main:export_statistics' %}" class="btn-export">
+                            Выгрузить в CSV
+                        </a>
+                    </div>
+                </div>
+
+                <div class="statistics-layout">
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="table-container">
+                        <table class="statistics-table">
+                            <thead>
+                                <tr>
+                                    <th>Категория</th>
+                                    <th>Заказов</th>
+                                    <th>Выручка</th>
+                                    <th>Средний чек</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stat in category_statistics %}
+                                <tr>
+                                    <td>{{ stat.category }}</td>
+                                    <td>{{ stat.total_orders }}</td>
+                                    <td>{{ stat.total_revenue|floatformat:2 }} ₽</td>
+                                    <td>{{ stat.average_check|floatformat:2 }} ₽</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+        
+        .statistics-page {
+            flex: 1 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .statistics-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-height: 400px;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chart-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .table-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            min-width: 600px;
+        }
+        
+        .statistics-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        .statistics-table th,
+        .statistics-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+        }
+
+        .statistics-table th:first-child,
+        .statistics-table td:first-child {
+            width: 35%;
+        }
+
+        .statistics-table th:nth-child(2),
+        .statistics-table td:nth-child(2) {
+            width: 15%;
+        }
+
+        .statistics-table th:nth-child(3),
+        .statistics-table td:nth-child(3) {
+            width: 25%;
+        }
+
+        .statistics-table th:nth-child(4),
+        .statistics-table td:nth-child(4) {
+            width: 25%;
+        }
+        
+        .statistics-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .btn-export {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #a09b99;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+            margin-right: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .btn-export:hover {
+            background: #a8a6a5;
+            transform: translateY(-2px);
+        }
+
+        .btn-export:active {
+            transform: translateY(0);
+        }
+
+        .row {
+            margin-bottom: 2rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
+        
+        @media (max-width: 1200px) {
+            .statistics-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-container {
+                margin-top: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .statistics-table th,
+            .statistics-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .category-statistics {
+            margin-top: 4rem;
+        }
+        
+        .section-title {
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 1.5rem;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Общие настройки для графиков
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 0
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Функция для уничтожения существующего графика
+        function destroyChart(chartInstance) {
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+        }
+
+        // Первый график (продукты)
+        const productCanvas = document.getElementById('productUsageChart');
+        let productChart;
+        let productData;
+        
+        try {
+            const productDataElement = document.getElementById('productChartData');
+            productData = JSON.parse(productDataElement.getAttribute('data-chart'));
+            console.log('Product Data:', productData);
+        } catch (e) {
+            console.error('Error parsing product data:', e);
+            return;
+        }
+        
+        if (productCanvas && productData && productData.names && productData.names.length > 0) {
+            destroyChart(productChart);
+            
+            productChart = new Chart(productCanvas, {
+                type: 'bar',
+                data: {
+                    labels: productData.names,
+                    datasets: [{
+                        label: 'Количество блюд',
+                        data: productData.dishCounts,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Общая стоимость (₽)',
+                        data: productData.totalCosts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        } else {
+            console.error('No valid data for product chart');
+        }
+
+        // Второй график (категории)
+        const categoryCanvas = document.getElementById('categoryChart');
+        let categoryChart;
+        let categoryData;
+        
+        try {
+            const categoryDataElement = document.getElementById('categoryChartData');
+            categoryData = JSON.parse(categoryDataElement.getAttribute('data-chart'));
+            console.log('Category Data:', categoryData);
+        } catch (e) {
+            console.error('Error parsing category data:', e);
+            return;
+        }
+        
+        if (categoryCanvas && categoryData && categoryData.names && categoryData.names.length > 0) {
+            destroyChart(categoryChart);
+            
+            categoryChart = new Chart(categoryCanvas, {
+                type: 'bar',
+                data: {
+                    labels: categoryData.names,
+                    datasets: [{
+                        label: 'Выручка (₽)',
+                        data: categoryData.revenue,
+                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Средний чек (₽)',
+                        data: categoryData.average,
+                        backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        } else {
+            console.error('No valid data for category chart');
+        }
+
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', function() {
+            if (productChart) {
+                productChart.resize();
+            }
+            if (categoryChart) {
+                categoryChart.resize();
+            }
+        });
+    });
+    </script>
+</body>
+</html> 
